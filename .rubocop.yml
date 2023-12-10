@@ -1,0 +1,24 @@
+AllCops:
+  NewCops: enable
+
+Layout/ArgumentAlignment:
+  Enabled: false
+
+Layout/FirstArrayElementIndentation:
+  Enabled: false
+  
+Metrics/AbcSize:
+  Max: 25
+  CountRepeatedAttributes: false
+
+Metrics/ClassLength:
+  Max: 300
+
+Metrics/MethodLength:
+  Max: 20
+
+Metrics/ModuleLength:
+  Max: 300
+
+Style/Lambda:
+  EnforcedStyle: literal
