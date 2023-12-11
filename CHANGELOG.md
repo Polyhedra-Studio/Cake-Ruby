@@ -1,3 +1,6 @@
+# 0.2.1 (12-10-2023)
+- [FIX] Fixed files path for require
+
 # 0.2.0 (12-10-2023)
 - [ADD][Runner] Added "Help" flag to bring up options
 - [ADD][Runner] Configured executable
