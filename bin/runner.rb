@@ -44,7 +44,7 @@ class Runner
   end
 
   def show_help
-    puts 'Usage: cake_tester [options]'
+    puts 'Usage: cake-tester [options]'
     puts '  -h, --help            Show this help message'
     puts '  -i, --interactive     Interactive mode'
     puts '  -v, --verbose         Verbose output'

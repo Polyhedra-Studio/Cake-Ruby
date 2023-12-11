@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 Gem::Specification.new do |gem|
-  gem.name          = 'cake_tester'
+  gem.name          = 'cake-tester'
   gem.version       = '0.2.0'
   gem.authors       = ['Polyhedra', 'C. Lee Spruit']
   gem.summary       = 'The lightweight, explicit testing framework for Ruby.'

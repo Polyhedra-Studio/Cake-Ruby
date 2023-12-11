@@ -54,8 +54,8 @@ You can also pass variables from parents and test stages.
 
 # How to run the test runner
 - The package will need to run globally. Install via this command:
-`gem install cake_tester`
-- After it's installed, you can run it by using `cake_tester` in the directory that you want to run your tests in. It will search any files in the directory or any sub-folders ending with `cake.rb`.
+`gem install cake-tester`
+- After it's installed, you can run it by using `cake-tester` in the directory that you want to run your tests in. It will search any files in the directory or any sub-folders ending with `cake.rb`.
 - You can also add flags to run specific tests or view output from specific tests.
 
 ## Flags
@@ -63,7 +63,7 @@ You can also pass variables from parents and test stages.
 ### File name filter
 - `-f [fileName]`
   - Filters tests based off of file name
-  - EX: `cake_tester -f foo` will test 'test-foo.cake.rb'
+  - EX: `cake-tester -f foo` will test 'test-foo.cake.rb'
 
 ### Verbose mode
 - `-v` or `--verbose`
@@ -74,13 +74,13 @@ You can also pass variables from parents and test stages.
   - All of these do similar things, which filters based off of title of the item. You can also use certain tags to run only a group, test runner, or a specific test.
   - Note - search is case-sensitive.
   - Examples: 
-    - `-t` **General search:** `ruby cake_tester -t foo` - Run all tests, groups, and runners with "foo" in the title
-    - `--tt` **Test search** `ruby cake_tester --tt "cool test"` - Run all tests with the phrase "cool test" in the title
-    - `--tte` **Test search, exact:** `ruby cake_tester --tte "should only run when this one specific thing happens"` - Runs only the test that matches the phrase exactly.
-    - `--tg` **Group search** `ruby cake_tester --tg bar` - Run all groups matching "bar" in the title
-    - `--tge` **Group search, exact:** `ruby cake_tester --tge "API Endpoints" - Runs all groups _exactly_ matching the phrase "API Endpoints"
-    - `--tr` **Test Runner search:** `ruby cake_tester --tr "Models" - Runs all test runners with "Models" in the title
-    - `--tre` **Test Runner search, exact:** `ruby cake_tester --tre "Models - User"` - Runs test runners that _exactly_ match the phrase "Models - User" 
+    - `-t` **General search:** `ruby cake-tester -t foo` - Run all tests, groups, and runners with "foo" in the title
+    - `--tt` **Test search** `ruby cake-tester --tt "cool test"` - Run all tests with the phrase "cool test" in the title
+    - `--tte` **Test search, exact:** `ruby cake-tester --tte "should only run when this one specific thing happens"` - Runs only the test that matches the phrase exactly.
+    - `--tg` **Group search** `ruby cake-tester --tg bar` - Run all groups matching "bar" in the title
+    - `--tge` **Group search, exact:** `ruby cake-tester --tge "API Endpoints" - Runs all groups _exactly_ matching the phrase "API Endpoints"
+    - `--tr` **Test Runner search:** `ruby cake-tester --tr "Models" - Runs all test runners with "Models" in the title
+    - `--tre` **Test Runner search, exact:** `ruby cake-tester --tre "Models - User"` - Runs test runners that _exactly_ match the phrase "Models - User" 
 
 ### Interactive mode
 - `-i`
