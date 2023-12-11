@@ -3,28 +3,6 @@
 # Holds a collection of filter settings. Filter settings are normally set via
 # the command line as flag options.
 class FilterSettings
-  # attr_reader(
-  #   :general_search_term,
-  #   :test_filter_term,
-  #   :test_search_for,
-  #   :group_filter_term,
-  #   :group_search_for,
-  #   :test_runner_filter_term,
-  #   :test_runner_search_for,
-  # )
-
-  attr_reader :test_runner_search_for
-
-  FILTER_SETTING_PROPS = %w[
-    generalSearchTerm
-    testFilterTerm
-    testSearchFor
-    groupFilterTerm
-    groupSearchFor
-    testRunnerFilterTerm
-    testRunnerSearchFor
-  ].freeze
-
   def initialize(
     general_search_term: nil,
     test_filter_term: nil,
@@ -34,13 +12,13 @@ class FilterSettings
     test_runner_filter_term: nil,
     test_runner_search_for: nil
   )
-    @general_search_term = general_search_term
-    @test_filter_term = test_filter_term
-    @test_search_for = test_search_for
-    @group_filter_term = group_filter_term
-    @group_search_for = group_search_for
-    @test_runner_filter_term = test_runner_filter_term
-    @test_runner_search_for = test_runner_search_for
+    @general_search_term = general_search_term || get_from_args(FilterProps::GENERAL_SEARCH_TERM)
+    @test_filter_term = test_filter_term || get_from_args(FilterProps::TEST_FILTER_TERM)
+    @test_search_for = test_search_for || get_from_args(FilterProps::TEST_SEARCH_FOR)
+    @group_filter_term = group_filter_term || get_from_args(FilterProps::GROUP_FILTER_TERM)
+    @group_search_for = group_search_for || get_from_args(FilterProps::GROUP_SEARCH_FOR)
+    @test_runner_filter_term = test_runner_filter_term || get_from_args(FilterProps::TEST_RUNNER_FILTER_TERM)
+    @test_runner_search_for = test_runner_search_for || get_from_args(FilterProps::TEST_RUNNER_SEARCH_FOR)
   end
 
   def has_general_search_term
@@ -82,13 +60,35 @@ class FilterSettings
   end
 
   def to_properties
-    []
+    props = []
+
+    props << [FilterProps::GENERAL_SEARCH_TERM, @general_search_term] if has_general_search_term
+    props << [FilterProps::TEST_FILTER_TERM, @test_filter_term] if has_test_filter_term
+    props << [FilterProps::TEST_SEARCH_FOR, @test_search_for] if has_test_search_for
+    props << [FilterProps::GROUP_FILTER_TERM, @group_filter_term] if has_group_filter_term
+    props << [FilterProps::GROUP_SEARCH_FOR, @group_search_for] if has_group_search_for
+    props << [FilterProps::TEST_RUNNER_FILTER_TERM, @test_runner_filter_term] if has_test_runner_filter_term
+    props << [FilterProps::TEST_RUNNER_SEARCH_FOR, @test_runner_search_for] if has_test_runner_search_for
+
+    props
   end
 
-  private
+  # @param [String] flag
+  # @return [String, Nil]
+  def get_from_args(flag)
+    index = ARGV.find_index(flag)
+    return ARGV[index + 1] if index && index != ARGV.length - 1
 
-  def build_arg(key, value)
-    # TODO: Figureout if this is actually needed as a flag like this
-    "--#{key}=#{value}"
+    nil
   end
+end
+
+module FilterProps
+  GENERAL_SEARCH_TERM = 'generalSearchTerm'
+  TEST_FILTER_TERM = 'testFilterTerm'
+  TEST_SEARCH_FOR = 'testSearchFor'
+  GROUP_FILTER_TERM = 'groupFilterTerm'
+  GROUP_SEARCH_FOR = 'groupSearchFor'
+  TEST_RUNNER_FILTER_TERM = 'testRunnerFilterTerm'
+  TEST_RUNNER_SEARCH_FOR = 'testRunnerSearchFor'
 end

@@ -20,6 +20,8 @@ module Contextual
       assign_children
     end
 
+    # @param parent_options [TestOptions]
+    # @return [void]
     def assign_parent(parent_options)
       super
       @children.each do |child|
@@ -29,6 +31,8 @@ module Contextual
       end
     end
 
+    # @param filter_settings [FilterSettings]
+    # @return [Boolean]
     def should_run_with_search_term_with_children(filter_settings)
       # Check if the general search term applies here
       return true if should_run_with_search_term(filter_settings)
@@ -42,6 +46,8 @@ module Contextual
       true
     end
 
+    # @param filter_settings [FilterSettings]
+    # @return [void]
     def report_children(filter_settings)
       @children.each do |child|
         if @filter_applies_to_children
@@ -52,6 +58,8 @@ module Contextual
       end
     end
 
+    # @param filter_settings [FilterSettings]
+    # @return [TestResult]
     def get_result(filter_settings)
       super
 
@@ -70,6 +78,8 @@ module Contextual
       @result
     end
 
+    # Counts all successes, including children
+    # @return [Integer]
     def successes
       current_success_count = @test_success_count
       @children.each do |child|
@@ -78,6 +88,8 @@ module Contextual
       current_success_count
     end
 
+    # Counts all failures, including children
+    # @return [Integer]
     def failures
       current_fail_count = @test_fail_count
       @children.each do |child|
@@ -86,6 +98,8 @@ module Contextual
       current_fail_count
     end
 
+    # Counts all neutrals, including children
+    # @return [Integer]
     def neutrals
       current_neutral_count = @test_neutral_count
       @children.each do |child|
@@ -94,6 +108,8 @@ module Contextual
       current_neutral_count
     end
 
+    # Counts all tests, including children
+    # @return [Integer]
     def total
       test_count = 0
       @children.each do |child|
@@ -106,6 +122,8 @@ module Contextual
       test_count
     end
 
+    # Handles when there is a error that makes it impossible to run
+    # @return [TestFailure]
     def critical_inconclusive
       super
       @children.each do |child|
@@ -116,6 +134,8 @@ module Contextual
 
     private
 
+    # Notifies the children that they have a parent
+    # @return [void]
     def assign_children
       @children.each do |child|
         if child.respond_to?(:assign_parent)
@@ -127,11 +147,15 @@ module Contextual
       end
     end
 
+    # @param filter_settings [FilterSettings]
+    # @return [Boolean]
     def should_run_filter_on_children(filter_settings)
       @filter_applies_to_children = true
       @children.any? { |child| child.should_run_with_filter(filter_settings) }
     end
 
+    # @param filter_settings [FilterSettings]
+    # @return [TestResult]
     def get_result_children(filter_settings)
       child_success_count = 0
       child_fail_count = 0

@@ -7,10 +7,12 @@ require 'ostruct'
 # The Context object is an OpenStruct, which means you can dynamically assign
 # as needed.
 class Context < OpenStruct
-  # @param [Object] actual expected object, ideally will be set during the
+  # @return [Object] actual expected object, ideally will be set during the
   #   Contexual::Node#run_action step
-  # @param [Object] expected
-  attr_accessor :expected, :actual
+  attr_accessor :actual
+
+  # @return [Object] expected
+  attr_accessor :expected
 
   def initialize
     super

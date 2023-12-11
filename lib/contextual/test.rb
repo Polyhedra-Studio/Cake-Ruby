@@ -10,6 +10,7 @@ require_relative 'child'
 # A Test is an actionable unit of testing.
 class Test < Contextual::Node
   include Contextual::Child
+  # @return [Boolean]
   attr_reader :ran_successfully
 
   # @param title [String]
@@ -39,6 +40,9 @@ class Test < Contextual::Node
     @ran_successfully = value
   end
 
+  # Should this run with the current filter settings
+  # @param filter_settings [FilterSettings]
+  # @return [Boolean]
   def should_run_with_filter(filter_settings)
     return filter_settings.testSearchFor == _title if filter_settings.hasTestSearchFor
     return _title.include? filter_settings.testFilterTerm if filter_settings.hasTestFilterTerm
@@ -46,6 +50,8 @@ class Test < Contextual::Node
     should_run_with_search_term(filter_settings)
   end
 
+  # Report results, if any
+  # @return [void]
   def report(*)
     @result.report(@parent_count)
 
@@ -54,6 +60,8 @@ class Test < Contextual::Node
     end
   end
 
+  # @param filter_settings [FilterSettings]
+  # @return [TestResult]
   def get_result(filter_settings)
     super
 
@@ -96,6 +104,7 @@ class Test < Contextual::Node
     end
   end
 
+  # @return [TestResult]
   def run_assertions
     # Don't bother running assertions if we've already come up failed
     return unless @result.nil?

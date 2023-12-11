@@ -29,6 +29,8 @@ module Contextual
       @result
     end
 
+    # Runs the setup hook
+    # @return [TestResult, Nil] Returns a TestFailure if the setup fails
     def run_setup
       return if @setup.nil?
 
@@ -40,6 +42,8 @@ module Contextual
       end
     end
 
+    # Runs the teardown hook
+    # @return [TestResult, Nil] Returns a TestFailure if the teardown fails
     def run_teardown
       return if @teardown.nil?
 
@@ -55,11 +59,17 @@ module Contextual
       end
     end
 
+    # @abstract Override this method in your subclass
+    # @param _filter_settings [FilterSettings] not used
+    # @return [TestResult]
     def get_result(_filter_settings)
       # This has been marked as skipped - do nothing
       TestNeutral.new(@title, 'Skipped') if @skip
     end
 
+    # Should this run with the current filter settings, checking general search
+    # @param filter_settings [FilterSettings]
+    # @return [Boolean]
     def should_run_with_search_term(filter_settings)
       # Check if the general search term applies here
       return @title.include?(filter_settings.general_search_term) if filter_settings.has_general_search_term

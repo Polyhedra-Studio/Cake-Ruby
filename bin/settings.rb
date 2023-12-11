@@ -4,13 +4,14 @@ require_relative '../lib/helpers/filter_settings'
 
 # Converts args into easily accessible settings
 class Settings
-  attr_reader :verbose, :file_filter, :vs_code, :interactive, :test_filter
+  attr_reader :verbose, :file_filter, :vs_code, :interactive, :test_filter, :show_help
 
   def initialize
     @verbose = ARGV.include?('-v') || ARGV.include?('--verbose')
     @file_filter = get_from_args('-f')
     @vs_code = ARGV.include? '--vs-code'
-    @interactive = ARGV.include? '-i'
+    @interactive = ARGV.include?('-i') || ARGV.include?('--interactive')
+    @show_help = ARGV.include?('-h') || ARGV.include?('--help')
     @test_filter = FilterSettings.new(
       general_search_term: get_from_args('-t'),
       test_filter_term: get_from_args('--tt'),

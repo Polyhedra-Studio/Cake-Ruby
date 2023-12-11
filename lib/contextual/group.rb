@@ -22,6 +22,9 @@ class Group < Contextual::Node
     set_parent(children)
   end
 
+  # Should this run with the current filter settings
+  # @param filter_settings [FilterSettings]
+  # @return [Boolean]
   def should_run_with_filter(filter_settings)
     # This should run failrly close to testRunner's version
     return @title == filter_settings.group_search_for if filter_settings.has_group_search_for
@@ -30,6 +33,9 @@ class Group < Contextual::Node
     should_run_with_search_term_with_children(filter_settings)
   end
 
+  # Report results, if any
+  # @param filter_settings [FilterSettings]
+  # @return [TestResult, Nil]
   def report(filter_settings)
     @result.report(@parent_count)
     return if @skip

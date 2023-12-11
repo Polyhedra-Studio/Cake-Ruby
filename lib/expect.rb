@@ -23,6 +23,8 @@ module Expect
 
   # Checks if actual == expected
   class Equals < ExpectBase
+    # Runs the validator and returns an AssertResult
+    # @return [AssertPass, AssertFailure]
     def run
       return AssertPass.new if @actual == @expected
 
@@ -38,6 +40,8 @@ module Expect
       super(actual: actual, expected: not_expected)
     end
 
+    # Runs the validator and returns an AssertResult
+    # @return [AssertPass, AssertFailure]
     def run
       return AssertPass.new if @actual != @expected
 
@@ -53,6 +57,8 @@ module Expect
       super(actual: actual)
     end
 
+    # Runs the validator and returns an AssertResult
+    # @return [AssertPass, AssertFailure]
     def run
       return AssertPass.new if @actual.nil?
 
@@ -66,6 +72,8 @@ module Expect
       super(actual: actual)
     end
 
+    # Runs the validator and returns an AssertResult
+    # @return [AssertPass, AssertFailure]
     def run
       return AssertPass.new unless @actual.nil?
 
@@ -79,6 +87,8 @@ module Expect
       super(actual: actual)
     end
 
+    # Runs the validator and returns an AssertResult
+    # @return [AssertPass, AssertFailure]
     def run
       return AssertPass.new if @actual
 
@@ -93,6 +103,8 @@ module Expect
       super(actual: actual, expected: true)
     end
 
+    # Runs the validator and returns an AssertResult
+    # @return [AssertPass, AssertFailure]
     def run
       return AssertPass.new unless @actual
 
@@ -107,6 +119,8 @@ module Expect
       @method = method
     end
 
+    # Runs the validator and returns an AssertResult
+    # @return [AssertPass, AssertFailure]
     def run
       return AssertPass.new if @actual.respond_to?(@method)
 
@@ -122,6 +136,8 @@ module Expect
       @method = method
     end
 
+    # Runs the validator and returns an AssertResult
+    # @return [AssertPass, AssertFailure]
     def run
       return AssertPass.new unless @actual.methods.include?(@method)
 
@@ -130,6 +146,8 @@ module Expect
     end
   end
 
+  # Checks if actual does not respond to a method
+  # Synonym for Expect::Undefined
   # @note (see Expect::Undefined)
   class DoesNotRespondTo < Undefined
   end

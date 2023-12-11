@@ -2,6 +2,7 @@
 
 require_relative '../test_options'
 
+# Contextual is a wrapper for Node and Node attributes
 module Contextual
   # A Child is a Node that has a parent
   module Child

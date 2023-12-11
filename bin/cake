@@ -1,3 +1,5 @@
+#!/usr/bin/env ruby
+
 # frozen_string_literal: true
 
 require_relative 'settings'
@@ -6,6 +8,11 @@ require_relative '../lib/test_message'
 
 settings = Settings.new
 runner = Runner.new
+
+if settings.show_help
+  runner.show_help
+  exit
+end
 
 cake_list = runner.cake_file_list
 
@@ -18,6 +25,10 @@ if cake_list.empty?
 end
 
 unless settings.interactive
-  runner.run(settings)
+  runner.run(settings, cake_list)
   exit
 end
+
+TestMessage.new('Cake Test Runner',
+'Interactive mode not implemented yet in this version of Cake. Please check back in a future version.').report
+exit
